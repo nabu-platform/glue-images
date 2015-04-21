@@ -48,10 +48,10 @@ public class ImageMethods {
 	
 	@SuppressWarnings("unchecked")
 	public static boolean checkImage(String message, Object expected, Object actual, Object configurationContent, Double threshold, boolean fail) throws IOException, JAXBException {
-		// defaults to 2% if nothing is set
+		// defaults to 0% if nothing is set
 		if (threshold == null) {
 			String configured = ScriptMethods.environment("images.threshold");
-			threshold = configured == null ? 0.02 : Double.parseDouble(configured);
+			threshold = configured == null ? 0 : Double.parseDouble(configured);
 		}
 		BufferedImage expectedImage = expected instanceof BufferedImage ? (BufferedImage) expected : ImageDiff.parse(new ByteArrayInputStream(ScriptMethods.bytes(expected)));
 		BufferedImage actualImage = expected instanceof BufferedImage ? (BufferedImage) actual : ImageDiff.parse(new ByteArrayInputStream(ScriptMethods.bytes(actual)));
