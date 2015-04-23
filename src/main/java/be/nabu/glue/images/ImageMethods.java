@@ -69,7 +69,7 @@ public class ImageMethods {
 				configuration
 			);
 			double diffPercentage = diff.getDiff();
-			boolean result = TestMethods.check(message, diffPercentage < threshold, String.format("%.2f", diffPercentage * 100) + "% < " + String.format("%.2f", threshold * 100) + "%", fail);
+			boolean result = TestMethods.check(message, diffPercentage <= threshold, String.format("%.2f", diffPercentage * 100) + "% <= " + String.format("%.2f", threshold * 100) + "%", fail);
 			// add it to a central map that can be used later
 			if (!ScriptRuntime.getRuntime().getContext().containsKey("imageDiffs")) {
 				ScriptRuntime.getRuntime().getContext().put("imageDiffs", new LinkedHashMap<String, byte[]>());
