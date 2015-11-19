@@ -11,43 +11,55 @@ import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBException;
 
 import be.nabu.glue.ScriptRuntime;
+import be.nabu.glue.annotations.GlueMethod;
+import be.nabu.glue.annotations.GlueParam;
 import be.nabu.glue.impl.methods.ScriptMethods;
 import be.nabu.glue.impl.methods.TestMethods;
+import be.nabu.libs.evaluator.annotations.MethodProviderClass;
 
+@MethodProviderClass(namespace = "image")
 public class ImageMethods {
 	
-	public static ImageConfiguration configureImageDiff(String algorithm) {
+	@GlueMethod(description = "Create a new configuration for an algorithm")
+	public static ImageConfiguration configureImageDiff(@GlueParam(name = "algorithm") String algorithm) {
 		ImageConfiguration configuration = new ImageConfiguration();
 		configuration.setAlgorithm(algorithm);
 		return configuration;
 	}
 	
-	public static boolean validateImage(String message, Object expected, Object actual) throws IOException, JAXBException {
+	@GlueMethod(description = "Validate an image against an expected image")
+	public static boolean validateImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual) throws IOException, JAXBException {
 		return validateImage(message, expected, actual, null, null);
 	}
 	
-	public static boolean validateImage(String message, Object expected, Object actual, Object configuration) throws IOException, JAXBException {
+	@GlueMethod(description = "Validate an image against an expected image with a specific configuration")
+	public static boolean validateImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual, @GlueParam(name = "configuration") Object configuration) throws IOException, JAXBException {
 		return validateImage(message, expected, actual, configuration, null);
 	}
 	
-	public static boolean validateImage(String message, Object expected, Object actual, Object configuration, Double threshold) throws IOException, JAXBException {
+	@GlueMethod(description = "Validate an image against an expected image with a specific configuration and a certain threshold")
+	public static boolean validateImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual, @GlueParam(name = "configuration") Object configuration, @GlueParam(name = "threshold") Double threshold) throws IOException, JAXBException {
 		return checkImage(message, expected, actual, configuration, threshold, false);
 	}
 
-	public static boolean confirmImage(String message, Object expected, Object actual) throws IOException, JAXBException {
+	@GlueMethod(description = "Confirm an image against an expected image")
+	public static boolean confirmImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual) throws IOException, JAXBException {
 		return confirmImage(message, expected, actual, null, null);
 	}
 
-	public static boolean confirmImage(String message, Object expected, Object actual, Object configuration) throws IOException, JAXBException {
+	@GlueMethod(description = "Confirm an image against an expected image with a specific configuration")
+	public static boolean confirmImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual, @GlueParam(name = "configuration") Object configuration) throws IOException, JAXBException {
 		return confirmImage(message, expected, actual, configuration, null);
 	}
 	
-	public static boolean confirmImage(String message, Object expected, Object actual, Object configuration, Double threshold) throws IOException, JAXBException {
+	@GlueMethod(description = "Confirm an image against an expected image with a specific configuration and a certain threshold")
+	public static boolean confirmImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual, @GlueParam(name = "configuration") Object configuration, @GlueParam(name = "threshold") Double threshold) throws IOException, JAXBException {
 		return checkImage(message, expected, actual, configuration, threshold, true);
 	}
 	
+	@GlueMethod(description = "Check an image against an expected image with a specific configuration and a certain threshold with variable failure")
 	@SuppressWarnings("unchecked")
-	public static boolean checkImage(String message, Object expected, Object actual, Object configurationContent, Double threshold, boolean fail) throws IOException, JAXBException {
+	public static boolean checkImage(@GlueParam(name = "message") String message, @GlueParam(name = "expected") Object expected, @GlueParam(name = "actual") Object actual, @GlueParam(name = "configuration") Object configurationContent, @GlueParam(name = "threshold") Double threshold, @GlueParam(name = "fail") boolean fail) throws IOException, JAXBException {
 		// defaults to 0% if nothing is set
 		if (threshold == null) {
 			String configured = ScriptMethods.environment("images.threshold");
