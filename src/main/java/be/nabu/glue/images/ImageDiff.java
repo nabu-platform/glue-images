@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import be.nabu.glue.core.impl.methods.ScriptMethods;
 import be.nabu.glue.images.api.ImageDiffAlgorithm;
 import be.nabu.glue.images.impl.ImagePixelDiff;
 import be.nabu.glue.images.impl.ImageRGBDiff;
-import be.nabu.glue.impl.methods.ScriptMethods;
 
 public class ImageDiff {
 	

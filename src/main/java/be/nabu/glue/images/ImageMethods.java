@@ -10,11 +10,11 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBException;
 
-import be.nabu.glue.ScriptRuntime;
 import be.nabu.glue.annotations.GlueMethod;
 import be.nabu.glue.annotations.GlueParam;
-import be.nabu.glue.impl.methods.ScriptMethods;
-import be.nabu.glue.impl.methods.TestMethods;
+import be.nabu.glue.core.impl.methods.ScriptMethods;
+import be.nabu.glue.core.impl.methods.TestMethods;
+import be.nabu.glue.utils.ScriptRuntime;
 import be.nabu.libs.evaluator.annotations.MethodProviderClass;
 
 @MethodProviderClass(namespace = "image")
